@@ -116,7 +116,7 @@ const Contact: React.FC = () => {
         <h2 className="section-title mb-8">Get in Touch</h2>
 
         <p className="text-center text-muted max-w-2xl mx-auto mb-16">
-          Have a project in mind or want to discuss a potential collaboration? Don't hesitate to shoot me a message!
+          Have a project in mind or want to discuss a potential collaboration? Feel free to reach out!
         </p>
 
         <div ref={ref} className="grid grid-cols-1 lg:grid-cols-2 gap-12">
