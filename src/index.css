@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: 139, 92, 246;
+  --secondary: 59, 130, 246;
+  --accent: 239, 68, 68;
+  --background: 18, 21, 38;
+  --foreground: 255, 255, 255;
+  --card: 30, 34, 58;
+  --border: 51, 60, 78;
+  --muted: 89, 97, 128;
+}
+
+.light {
+  --primary: 139, 92, 246;
+  --secondary: 59, 130, 246;
+  --accent: 239, 68, 68;
+  --background: 240, 240, 245;
+  --foreground: 18, 21, 38;
+  --card: 255, 255, 255;
+  --border: 212, 212, 216;
+  --muted: 113, 113, 122;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(var(--primary), 0.5);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--primary), 0.8);
+}
+
+@layer components {
+  .section-title {
+    @apply text-4xl font-bold text-center relative;
+  }
+  
+  .section-title::after {
+    content: "";
+    @apply block w-24 h-1 bg-primary mt-4 mx-auto rounded-full;
+  }
+  
+  .skill-bar {
+    @apply h-2 bg-gray-700/30 rounded-full overflow-hidden relative;
+  }
+  
+  .skill-progress {
+    @apply h-full rounded-full;
+    background: linear-gradient(90deg, rgb(var(--primary)), rgb(var(--secondary)));
+  }
+  
+  .card {
+    @apply bg-card rounded-xl p-6 shadow-lg border border-border/20 transition-all;
+  }
+  
+  .button-primary {
+    @apply px-6 py-3 bg-primary text-white font-medium rounded-lg transition-all hover:bg-primary/80 focus:ring-2 focus:ring-primary/50 focus:outline-none;
+  }
+  
+  .button-secondary {
+    @apply px-6 py-3 bg-transparent text-white font-medium rounded-lg border border-white/20 transition-all hover:bg-white/10 focus:ring-2 focus:ring-white/50 focus:outline-none;
+  }
+  
+  .tech-tag {
+    @apply px-4 py-1 text-sm font-medium rounded-full;
+    background: rgba(var(--primary), 0.2);
+    color: rgb(var(--foreground));
+    backdrop-filter: blur(4px);
+  }
+}
