@@ -137,7 +137,7 @@ const Experience: React.FC = () => {
 
         <div className="mt-16 text-center">
           <a 
-            href="/tanisha.resume (2).pdf" 
+            href="/tanisha_resume1.pdf" 
             download 
             className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-lg font-medium hover:shadow-lg hover:shadow-primary/20 transition-all"
           >
