@@ -1,9 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tanisha Bhatt — Backend Developer</title>
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -89,12 +91,60 @@ nav {
   display: flex; align-items: center; gap: 14px;
 }
 .hero-eyebrow::after { content: ''; flex: 1; max-width: 50px; height: 1px; background: var(--amber); }
+
+/* HERO LAYOUT: name left, photo right */
+.hero-top {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 60px;
+  align-items: flex-end;
+  margin-bottom: 0;
+}
 .hero-name {
   font-size: clamp(60px, 10.5vw, 124px);
   font-weight: 700; color: var(--text);
-  letter-spacing: -0.04em; line-height: 0.9; margin-bottom: 0;
+  letter-spacing: -0.04em; line-height: 0.9;
 }
 .hero-name .line2 { color: var(--amber); display: block; }
+
+/* PROFILE PHOTO */
+.hero-photo-wrap {
+  flex-shrink: 0;
+  position: relative;
+  width: 200px;
+  height: 240px;
+  align-self: flex-end;
+  margin-bottom: 6px;
+}
+.hero-photo-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border: 1px solid var(--amber);
+  pointer-events: none;
+  z-index: 2;
+}
+.hero-photo-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  right: -8px;
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--border);
+  z-index: 0;
+}
+.hero-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  filter: grayscale(20%) contrast(1.05);
+  position: relative;
+  z-index: 1;
+}
+
 .hero-divider {
   width: 100%; height: 1px; background: var(--border); margin: 38px 0;
   position: relative;
@@ -208,23 +258,61 @@ nav {
   gap: 2px; background: var(--border-light); border: 1px solid var(--border-light);
 }
 .project-card {
-  background: var(--surface); padding: 36px;
+  background: var(--surface); padding: 0;
   transition: background 0.2s; position: relative;
   display: flex; flex-direction: column;
+  overflow: hidden;
 }
 .project-card:hover { background: var(--card); }
 .project-card.featured { grid-column: 1 / -1; }
-.project-num { font-family: var(--mono); font-size: 10px; color: var(--border); letter-spacing: 0.12em; margin-bottom: 18px; }
-.project-title { font-size: 20px; font-weight: 600; color: var(--text); letter-spacing: -0.02em; margin-bottom: 12px; }
-.project-desc { font-size: 14px; color: var(--muted2); line-height: 1.78; margin-bottom: 24px; flex: 1; }
-.project-metrics { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+
+/* Project image */
+.project-img-wrap {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+  border-bottom: 1px solid var(--border-light);
+  flex-shrink: 0;
+}
+.project-card.featured .project-img-wrap {
+  height: 300px;
+}
+.project-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 0.5s ease, filter 0.3s ease;
+  filter: brightness(0.85) saturate(0.8);
+}
+.project-card:hover .project-img {
+  transform: scale(1.03);
+  filter: brightness(0.95) saturate(1);
+}
+/* Amber overlay on hover */
+.project-img-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(10,14,26,0.7) 100%);
+  pointer-events: none;
+}
+
+/* Project content below image */
+.project-content { padding: 28px 32px; display: flex; flex-direction: column; flex: 1; }
+.project-num { font-family: var(--mono); font-size: 10px; color: var(--border); letter-spacing: 0.12em; margin-bottom: 12px; }
+.project-title { font-size: 20px; font-weight: 600; color: var(--text); letter-spacing: -0.02em; margin-bottom: 10px; }
+.project-desc { font-size: 14px; color: var(--muted2); line-height: 1.78; margin-bottom: 20px; flex: 1; }
+.project-metrics { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
 .project-metric {
   font-family: var(--mono); font-size: 11px; color: var(--amber);
   background: var(--amber-glow); border: 1px solid rgba(200,169,110,0.2); padding: 4px 12px;
 }
 .project-foot {
   display: flex; align-items: center; justify-content: space-between;
-  border-top: 1px solid var(--border-light); padding-top: 20px; margin-top: auto; gap: 16px;
+  border-top: 1px solid var(--border-light); padding-top: 18px; margin-top: auto; gap: 16px;
 }
 .project-stack { display: flex; flex-wrap: wrap; gap: 5px; }
 .project-tech {
@@ -311,12 +399,15 @@ footer { border-top: 1px solid var(--border-light); padding: 30px 0; }
   .wrap { padding: 0 24px; }
   .nav-inner { padding: 0 24px; }
   .nav-links { display: none; }
+  .hero-top { grid-template-columns: 1fr; gap: 32px; }
+  .hero-photo-wrap { width: 140px; height: 168px; }
   .hero-bottom { grid-template-columns: 1fr; gap: 36px; }
   .hero-right { align-items: flex-start; }
   .about-layout { grid-template-columns: 1fr; gap: 48px; }
   .about-cards { grid-template-columns: 1fr; }
   .projects-grid { grid-template-columns: 1fr; }
   .project-card.featured { grid-column: auto; }
+  .project-card.featured .project-img-wrap { height: 220px; }
   .cp-layout { grid-template-columns: 1fr; gap: 40px; }
   .contact-layout { grid-template-columns: 1fr; gap: 48px; }
   .footer-inner { flex-direction: column; gap: 8px; text-align: center; }
@@ -324,7 +415,7 @@ footer { border-top: 1px solid var(--border-light); padding: 30px 0; }
 @media (max-width: 480px) {
   .hero-name { font-size: 56px; }
   .exp-item { padding: 28px 24px; }
-  .project-card { padding: 28px 24px; }
+  .project-content { padding: 24px 20px; }
 }
 </style>
 </head>
@@ -342,7 +433,7 @@ footer { border-top: 1px solid var(--border-light); padding: 30px 0; }
       <a href="#projects">Projects</a>
       <a href="#contact">Contact</a>
     </div>
-    <a href="Tanisha_Bhatt_Resume.pdf" download class="nav-cta">Resume ↗</a>
+    <a href="Tanisha_Resume.pdf" download class="nav-cta">Resume ↗</a>
   </div>
 </nav>
 
@@ -352,15 +443,20 @@ footer { border-top: 1px solid var(--border-light); padding: 30px 0; }
 <section id="hero">
   <div class="wrap">
     <div class="hero-eyebrow">Backend Developer · Open to full-time roles</div>
-    <div class="hero-name">
-      Tanisha
-      <span class="line2">Bhatt</span>
+    <div class="hero-top">
+      <div class="hero-name">
+        Tanisha
+        <span class="line2">Bhatt</span>
+      </div>
+      <div class="hero-photo-wrap">
+        <img src="public/images/tanisha.jpeg" alt="Tanisha Bhatt" class="hero-photo">
+      </div>
     </div>
     <div class="hero-divider" data-role="Node.js · Express · MongoDB · AWS · Docker"></div>
     <div class="hero-bottom">
       <p class="hero-desc">
         I design and ship <strong>production-grade backend systems</strong> — REST APIs, real-time WebSocket services,
-        authentication infrastructure, and cloud deployments. Final-year CS at AKGEC (CGPA 8.7).
+        authentication infrastructure, and cloud deployments. Final-year CS at AKGEC (CGPA 8.8).
         Seeking a <strong>full-time SDE role at an early-stage startup</strong> where backend ownership matters.
       </p>
       <div class="hero-right">
@@ -467,7 +563,7 @@ footer { border-top: 1px solid var(--border-light); padding: 30px 0; }
       <div class="exp-item fade-up">
         <div class="exp-header">
           <div class="exp-title">Backend Developer Intern</div>
-          <div class="exp-period">Mar 2026 — May 2026</div>
+          <div class="exp-period">Feb 2026 — Apr 2026</div>
         </div>
         <div class="exp-company">Unfluke · Noida</div>
         <ul class="exp-bullets">
@@ -511,67 +607,89 @@ footer { border-top: 1px solid var(--border-light); padding: 30px 0; }
     <div class="section-eyebrow fade-up">Projects</div>
     <div class="section-title fade-up">Things I've built</div>
     <div class="projects-grid">
+
+      <!-- Project 01: Featured -->
       <div class="project-card featured fade-up">
-        <div class="project-num">01 — FEATURED</div>
-        <div class="project-title">Learnova — Learning Management System</div>
-        <p class="project-desc">A real-time LMS with Teacher and Student roles, full RBAC, JWT authentication, live WebSocket messaging, assignment management, and a MongoDB schema built for 1K+ documents. 15+ REST endpoints, each hardened with middleware and validation.</p>
-        <div class="project-metrics">
-          <span class="project-metric">15+ REST endpoints</span>
-          <span class="project-metric">&lt;100ms WebSocket latency</span>
-          <span class="project-metric">1K+ document schema</span>
-          <span class="project-metric">2-role RBAC</span>
+        <div class="project-img-wrap">
+          <img src="public/images/learnova.jpeg" alt="Learnova LMS screenshot" class="project-img">
         </div>
-        <div class="project-foot">
-          <div class="project-stack">
-            <span class="project-tech">Node.js</span><span class="project-tech">Express.js</span>
-            <span class="project-tech">MongoDB</span><span class="project-tech">WebSocket</span>
-            <span class="project-tech">JWT</span><span class="project-tech">Bcrypt</span><span class="project-tech">Mongoose</span>
+        <div class="project-content">
+          <div class="project-num">01 — FEATURED</div>
+          <div class="project-title">Learnova — Learning Management System</div>
+          <p class="project-desc">A real-time LMS with Teacher and Student roles, full RBAC, JWT authentication, live WebSocket messaging, assignment management, and a MongoDB schema built for 1K+ documents. 15+ REST endpoints, each hardened with middleware and validation.</p>
+          <div class="project-metrics">
+            <span class="project-metric">15+ REST endpoints</span>
+            <span class="project-metric">&lt;100ms WebSocket latency</span>
+            <span class="project-metric">1K+ document schema</span>
+            <span class="project-metric">2-role RBAC</span>
           </div>
-          <a href="https://github.com/Error404-ai/learnova" target="_blank" rel="noopener" class="project-link">
-            GitHub <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
-          </a>
+          <div class="project-foot">
+            <div class="project-stack">
+              <span class="project-tech">Node.js</span><span class="project-tech">Express.js</span>
+              <span class="project-tech">MongoDB</span><span class="project-tech">WebSocket</span>
+              <span class="project-tech">JWT</span><span class="project-tech">Bcrypt</span><span class="project-tech">Mongoose</span>
+            </div>
+            <a href="https://github.com/Error404-ai/learnova" target="_blank" rel="noopener" class="project-link">
+              GitHub <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
+            </a>
+          </div>
         </div>
       </div>
+
+      <!-- Project 02 -->
       <div class="project-card fade-up">
-        <div class="project-num">02</div>
-        <div class="project-title">Quiz Portal — Live Assessment Platform</div>
-        <p class="project-desc">Full-stack quiz platform used live for AKGEC Programming Club competitions. Randomized question banks, real-time timers, automated grading, admin dashboard monitoring simultaneous exams. 90% error reduction through layered validation.</p>
-        <div class="project-metrics">
-          <span class="project-metric">400+ attempts graded</span>
-          <span class="project-metric">90% error reduction</span>
-          <span class="project-metric">5+ live exams run</span>
+        <div class="project-img-wrap">
+          <img src="public/images/quiz.png" alt="Quiz Portal screenshot" class="project-img">
         </div>
-        <div class="project-foot">
-          <div class="project-stack">
-            <span class="project-tech">Node.js</span><span class="project-tech">Express.js</span>
-            <span class="project-tech">MongoDB</span><span class="project-tech">AdminLTE</span>
-            <span class="project-tech">EJS</span><span class="project-tech">Validator</span>
+        <div class="project-content">
+          <div class="project-num">02</div>
+          <div class="project-title">Quiz Portal — Live Assessment Platform</div>
+          <p class="project-desc">Full-stack quiz platform used live for AKGEC Programming Club competitions. Randomized question banks, real-time timers, automated grading, admin dashboard monitoring simultaneous exams. 90% error reduction through layered validation.</p>
+          <div class="project-metrics">
+            <span class="project-metric">400+ attempts graded</span>
+            <span class="project-metric">90% error reduction</span>
+            <span class="project-metric">5+ live exams run</span>
           </div>
-          <a href="https://github.com/Error404-ai/Quiz-Portal" target="_blank" rel="noopener" class="project-link">
-            GitHub <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
-          </a>
+          <div class="project-foot">
+            <div class="project-stack">
+              <span class="project-tech">Node.js</span><span class="project-tech">Express.js</span>
+              <span class="project-tech">MongoDB</span><span class="project-tech">AdminLTE</span>
+              <span class="project-tech">EJS</span><span class="project-tech">Validator</span>
+            </div>
+            <a href="https://github.com/Error404-ai/Quiz-Portal" target="_blank" rel="noopener" class="project-link">
+              GitHub <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
+            </a>
+          </div>
         </div>
       </div>
+
+      <!-- Project 03 -->
       <div class="project-card fade-up">
-        <div class="project-num">03</div>
-        <div class="project-title">Music Streaming API — Backend System</div>
-        <p class="project-desc">Production-ready backend for a streaming service. JWT auth, file uploads via Multer, playlist CRUD, full-text search, and rate limiting. 99.9% uptime through robust error handling, validated with 20+ Postman test cases per route.</p>
-        <div class="project-metrics">
-          <span class="project-metric">100+ tracks</span>
-          <span class="project-metric">99.9% uptime</span>
-          <span class="project-metric">20+ test cases</span>
+        <div class="project-img-wrap">
+          <img src="public/images/Screenshot 2025-06-07 115006.png" alt="Music Streaming API screenshot" class="project-img">
         </div>
-        <div class="project-foot">
-          <div class="project-stack">
-            <span class="project-tech">Node.js</span><span class="project-tech">Express.js</span>
-            <span class="project-tech">MongoDB</span><span class="project-tech">JWT</span>
-            <span class="project-tech">Multer</span><span class="project-tech">Rate-Limit</span>
+        <div class="project-content">
+          <div class="project-num">03</div>
+          <div class="project-title">Music Streaming API — Backend System</div>
+          <p class="project-desc">Production-ready backend for a streaming service. JWT auth, file uploads via Multer, playlist CRUD, full-text search, and rate limiting. 99.9% uptime through robust error handling, validated with 20+ Postman test cases per route.</p>
+          <div class="project-metrics">
+            <span class="project-metric">100+ tracks</span>
+            <span class="project-metric">99.9% uptime</span>
+            <span class="project-metric">20+ test cases</span>
           </div>
-          <a href="https://github.com/Error404-ai/music_app" target="_blank" rel="noopener" class="project-link">
-            GitHub <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
-          </a>
+          <div class="project-foot">
+            <div class="project-stack">
+              <span class="project-tech">Node.js</span><span class="project-tech">Express.js</span>
+              <span class="project-tech">MongoDB</span><span class="project-tech">JWT</span>
+              <span class="project-tech">Multer</span><span class="project-tech">Rate-Limit</span>
+            </div>
+            <a href="https://github.com/Error404-ai/music_app" target="_blank" rel="noopener" class="project-link">
+              GitHub <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
+            </a>
+          </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -682,11 +800,10 @@ footer { border-top: 1px solid var(--border-light); padding: 30px 0; }
           <div class="resume-title">Tanisha Bhatt</div>
           <div class="resume-sub">
             Backend Developer · Node.js · Express · MongoDB<br>
-            B.Tech CS · AKGEC Ghaziabad · CGPA 8.8<br>
+            B.Tech CS · AKGEC Ghaziabad · CGPA 8.7<br>
             Available for full-time roles
           </div>
-          <!-- Replace href below with your real resume file or Google Drive link -->
-          <a href="Tanisha_Bhatt_Resume.pdf" download class="resume-btn">Download Resume ↓</a>
+          <a href="public/Tanisha_Bhatt_Resume (1).pdf" download class="resume-btn">Download Resume ↓</a>
         </div>
         <div class="contact-details">
           <div>tanisha4bhatt@gmail.com</div>
@@ -702,7 +819,7 @@ footer { border-top: 1px solid var(--border-light); padding: 30px 0; }
 
 <footer>
   <div class="footer-inner">
-    <div class="footer-text">© 2025 Tanisha Bhatt</div>
+    <div class="footer-text">© 2026 Tanisha Bhatt</div>
     <div class="footer-text">Backend Developer · Ghaziabad, India</div>
   </div>
 </footer>
