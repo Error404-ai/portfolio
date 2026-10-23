@@ -33,7 +33,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(9,14,12,.85);backdrop-filte
 
 /* HERO */
 .hero{position:relative;padding:24px 0;height:calc(100svh - 62px);min-height:540px;max-height:800px;box-sizing:border-box;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}.hero::before{content:'';position:absolute;right:-6%;top:6%;width:640px;height:640px;background:radial-gradient(circle,rgba(76,92,255,.22),transparent 65%);pointer-events:none;z-index:-1}.who{display:flex;align-items:center;gap:18px;margin-bottom:20px}.avatar{width:clamp(64px,11vh,96px);height:clamp(64px,11vh,96px);overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#17224A,#0F2A22);font-weight:800;font-size:28px;color:#95A1FF;border-radius:24px;object-fit:cover;object-position:center 20%;border:2px solid var(--blue);flex-shrink:0}
-.kicker{font-size:15px;color:var(--mute)}
+.kicker{font-size:15px;color:var(--mute)}.ready{color:var(--green);font-weight:700}.ready::before{content:'';display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-right:8px;animation:pulse 2s infinite}@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
 h1{font-size:clamp(40px,min(5.6vw,9vh),84px);font-weight:800;line-height:1;letter-spacing:-.045em;margin-bottom:14px}.tag{font-size:clamp(20px,min(2.3vw,3.6vh),30px);font-weight:700;letter-spacing:-.03em;line-height:1.15;color:#95A1FF;max-width:520px;margin-bottom:20px}
 h1 .ln{display:block;overflow:hidden;padding-bottom:.08em}
 h1 .ln>span{display:inline-block;transform:translateY(106%);animation:rise .9s cubic-bezier(.2,.8,.2,1) forwards}
@@ -128,7 +128,7 @@ footer{border-top:1px solid var(--line);padding:24px 0;font-size:13px;color:var(
 <main id="top" class="wrap">
   <div class="hero">
     <div>
-      <div class="who"><span class="avatar">TB<img src="public/images/tanisha.jpeg" alt="Tanisha Bhatt" onerror="this.style.display='none'"></span><p class="kicker">Backend developer in Ghaziabad,<br>open to SDE roles from 2027</p></div>
+      <div class="who"><span class="avatar">TB<img src="public/images/tanisha.jpeg" alt="Tanisha Bhatt" onerror="this.style.display='none'"></span><p class="kicker">Backend developer in Delhi NCR<br><span class="ready">Ready to join immediately</span></p></div>
       <h1><span class="ln"><span>Tanisha Bhatt</span></span></h1>
       <p class="tag">Backends that stay correct when things go wrong.</p>
       <p class="lede">I build REST APIs in Node.js and FastAPI on MongoDB, with authentication, role-based access, concurrency-safe data and tests. Final-year CS student at AKGEC, looking for an SDE or backend role.</p>
@@ -165,7 +165,7 @@ footer{border-top:1px solid var(--line);padding:24px 0;font-size:13px;color:var(
       <div>
         <p>I'm a final-year computer science student at AKGEC, Ghaziabad (CGPA 8.7), with a backend focus and growing full stack skills. I like designing APIs that handle bad input, retries and concurrent users without surprises.</p>
         <p>I coordinate Team Conatus, the college programming club (45 members), where I mentor 10+ junior developers and build the club's web applications. I've also taught a Node.js, Express.js and MongoDB workshop to 80+ students.</p>
-        <p>Currently looking for an SDE or backend developer role, starting in 2027.</p>
+        <p>Currently looking for an SDE or backend developer role. Ready to join immediately.</p>
       </div>
     </div>
   </section>
@@ -249,7 +249,7 @@ footer{border-top:1px solid var(--line);padding:24px 0;font-size:13px;color:var(
       <a href="https://linkedin.com/in/tanisha-bhatt-927315303" target="_blank" rel="noopener" class="btn btn-line">LinkedIn</a>
       <a href="https://github.com/Error404-ai" target="_blank" rel="noopener" class="btn btn-line">GitHub</a>
     </div>
-    <p class="meta rv">Open to SDE and backend roles from 2027 · +91 73885 25564 · Ghaziabad, Uttar Pradesh</p>
+    <p class="meta rv"><span class="ready">Ready to join immediately</span> · Open to SDE and backend roles · +91 73885 25564 · Delhi NCR</p>
   </section>
 </main>
 
